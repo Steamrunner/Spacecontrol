@@ -1,0 +1,45 @@
+#!/usr/bin/env python
+
+import cgi
+import serial
+import time
+import sys
+import getpass
+
+serialPort = "/dev/ttyACM0"
+
+print "Content-type: text/html"
+print ""
+
+command = ""
+
+try: 
+	fs = cgi.FieldStorage()
+	command = fs["value"].value
+except: 
+	try:
+		command = sys.argv[1]
+	except:
+		print "Error!!!", sys.exc_info()[0]
+
+ser = serial.Serial(serialPort, 2400)
+
+ser.open()
+for i in range(0, 4):
+	command = "%" + str(i) + "#" + command 
+	ser.write(command)
+
+	time.sleep(0.4)
+
+	while ser.inWaiting() > 0:
+	  ser.read()
+
+time.sleep(1)
+
+while ser.inWaiting() > 0:
+  ser.read()
+
+ser.close()
+
+print '<head><meta HTTP-EQUIV="REFRESH" content="0; url=http://localhost"></head>'
+
