@@ -1,0 +1,22 @@
+#!/bin/bash
+
+echo "Content-type: text/html"
+echo ""
+
+YOUTUBE=`echo "$QUERY_STRING" | grep -oE "(^|[?&])youtube=[^&]+" | sed "s/%20/ /g" | cut -f 2 -d "="`
+
+if [ "$YOUTUBE" == "" ]
+then
+	YOUTUBE=$1
+fi
+
+if [ "$YOUTUBE" != "" ]
+then
+	URLSTRING="http://www.youtube.com/watch?v="
+	URLSTRING=$URLSTRING$YOUTUBE
+
+	vlc -I dummy --vout null --play-and-exit $URLSTRING &
+fi
+
+echo '<head><meta HTTP-EQUIV="REFRESH" content="0; url=http://audio/spacecontrol"></head>'
+
