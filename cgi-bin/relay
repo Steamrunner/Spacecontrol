@@ -25,6 +25,7 @@ except:
 ser = serial.Serial(serialPort, 2400)
 
 ser.open()
+fcntl.flock(ser.fileno(), LOCK_EX)
 
 ser.write(command)
 
