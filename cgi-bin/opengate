@@ -1,0 +1,9 @@
+#!/bin/bash
+
+echo "Content-type: text/html"
+echo ""
+
+/opt/gatekeeper.py
+
+echo '<head><meta HTTP-EQUIV="REFRESH" content="0; url=http://spacecontrol"></head>'
+
