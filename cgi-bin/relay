@@ -35,5 +35,5 @@ while ser.inWaiting() > 0:
 
 ser.close()
 
-print '<head><meta HTTP-EQUIV="REFRESH" content="0; url=http://spacecontrol"></head>'
+print '<head><meta HTTP-EQUIV="REFRESH" content="0; url=http://spacecontrol.0x20.be"></head>'
 

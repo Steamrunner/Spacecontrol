@@ -18,5 +18,5 @@ then
 	vlc -I dummy --vout null --play-and-exit $URLSTRING &
 fi
 
-echo '<head><meta HTTP-EQUIV="REFRESH" content="0; url=http://spacecontrol"></head>'
+echo '<head><meta HTTP-EQUIV="REFRESH" content="0; url=http://spacecontrol.0x20.be"></head>'
 
