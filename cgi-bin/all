@@ -5,6 +5,7 @@ import serial
 import time
 import sys
 import getpass
+import fcntl
 
 serialPort = "/dev/ttyACM0"
 
