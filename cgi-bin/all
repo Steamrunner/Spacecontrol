@@ -13,13 +13,14 @@ print "Content-type: text/html"
 print ""
 
 command = ""
+value = ""
 
 try: 
 	fs = cgi.FieldStorage()
-	command = fs["value"].value
+	value = fs["value"].value
 except: 
 	try:
-		command = sys.argv[1]
+		value = sys.argv[1]
 	except:
 		print "Error!!!", sys.exc_info()[0]
 
@@ -29,10 +30,12 @@ ser.open()
 fcntl.flock(ser.fileno(), fcntl.LOCK_EX)
 
 for i in range(0, 4):
-	command = "%" + str(i) + "#" + command 
+	command = "%" + str(i) + "#" + value 
 	ser.write(command)
 
 	time.sleep(0.4)
+
+	command = ""
 
 	while ser.inWaiting() > 0:
 	  ser.read()
