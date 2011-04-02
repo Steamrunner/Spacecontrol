@@ -53,6 +53,9 @@ void loop() {
       Serial.print(relay);
       Serial.print(" set to ");
       Serial.println(relayValue);
+      relay = -1;
+      relayValue = -1;
+      state = -1;
     }
   }
 }
@@ -71,5 +74,4 @@ void setup() {
   digitalWrite(RELAY3, HIGH);
   Serial.println("Ready for commands");
 }
-
 
