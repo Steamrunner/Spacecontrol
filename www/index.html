@@ -1,88 +1,80 @@
-<HTML>
-<BODY BgCOLOR="darkred">
-<table borderstyle=none>
-<tr>
-<td><form action="../cgi-bin/relay" method="get">
-<input type="hidden" name="relay" value="0">
-<input type="hidden" name="value" value="1">
-<input type="submit" value="Relay 0 ON"/>
-</form>
-</td>
-<td>
-<form action="../cgi-bin/relay" method="get">
-<input type="hidden" name="relay" value="0">
-<input type="hidden" name="value" value="0">
-<input type="submit" value="Relay 0 Off"/>
-</form>
-</td>
-</tr>
-<tr>
-<td><form action="../cgi-bin/relay" method="get">
-<input type="hidden" name="relay" value="1">
-<input type="hidden" name="value" value="1">
-<input type="submit" value="Relay 1 ON"/>
-</form>
-</td>
-<td>
-<form action="../cgi-bin/relay" method="get">
-<input type="hidden" name="relay" value="1">
-<input type="hidden" name="value" value="0">
-<input type="submit" value="Relay 1 Off"/>
-</form>
-</td>
-</tr>
-<tr>
-<td><form action="../cgi-bin/relay" method="get">
-<input type="hidden" name="relay" value="2">
-<input type="hidden" name="value" value="1">
-<input type="submit" value="Relay 2 ON"/>
-</form>
-</td>
-<td>
-<form action="../cgi-bin/relay" method="get">
-<input type="hidden" name="relay" value="2">
-<input type="hidden" name="value" value="0">
-<input type="submit" value="Relay 2 Off"/>
-</form>
-</td>
-</tr>
-<tr>
-<td><form action="../cgi-bin/relay" method="get">
-<input type="hidden" name="relay" value="3">
-<input type="hidden" name="value" value="1">
-<input type="submit" value="Relay 3 ON"/>
-</form>
-</td>
-<td>
-<form action="../cgi-bin/relay" method="get">
-<input type="hidden" name="relay" value="3">
-<input type="hidden" name="value" value="0">
-<input type="submit" value="Relay 3 Off"/>
-</form>
-</td>
-</tr>
-<tr>
-<td><form action="../cgi-bin/all" method="get">
-<input type="hidden" name="value" value="1">
-<input type="submit" value="ALL ON"/>
-</form>
-</td>
-<td>
-<form action="../cgi-bin/all" method="get">
-<input type="hidden" name="value" value="0">
-<input type="submit" value="ALL Off"/>
-</form>
-</td>
-</tr>
-</table> 
-<HR><BR>
-<form action="../cgi-bin/play" method="get">
-<input type="hidden" name="youtube" value="oShTJ90fC34">
-<input type="submit" value="RimShot"/>
-</form>
-<form action="../cgi-bin/opengate" method="get">
-<input type="submit" value="Open Gate!"/>
-</form>
+<html>
+<body bgcolor="darkred">
+
+<script>
+function SubmitRelayChange( sender, replayNr, replayState ) {
+	sender.disabled = true;
+
+	var xmlHttp = new XMLHttpRequest();
+	xmlHttp.onreadystatechange = function() { HandleRequestResponse( xmlHttp, sender ); };
+	xmlHttp.open( "GET", "../cgi-bin/relay?relay=" + replayNr.toString() + "&value=" + replayState.toString(), true );
+	xmlHttp.send( null );
+}
+
+function HandleRequestResponse( xmlHttp, sender ) {
+    if ( !(xmlHttp.readyState == 4 && xmlHttp.status == 200)) return;
+
+	sender.disabled = false;
+}
+
+function SubmitAllChange( sender, replayState ) {
+	var elements = [];
+
+	for ( var i = 0; i < 4; i++ ) {
+		elements[i] = document.getElementById( i.toString() + "_" + replayState.toString() );
+	}
+
+	for ( i in elements ) {
+		elements[i].click();
+	}
+}
+</script>
+
+<table borderstyle="none">
+	<tr>
+		<td>
+			<input type="submit" value="Relay 0 ON" onclick="SubmitRelayChange( this, 0, 1 ); return false;" id="0_1" />
+		</td>
+		<td>
+			<input type="submit" value="Relay 0 OFF" onclick="SubmitRelayChange( this, 0, 0 ); return false;" id="0_0" />
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<input type="submit" value="Relay 1 ON" onclick="SubmitRelayChange( this, 1, 1 ); return false;" id="1_1" />
+		</td>
+		<td>
+			<input type="submit" value="Relay 1 OFF" onclick="SubmitRelayChange( this, 1, 0 ); return false;" id="1_0" />
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<input type="submit" value="Relay 2 ON" onclick="SubmitRelayChange( this, 2, 1 ); return false;" id="2_1" />
+		</td>
+		<td>
+			<input type="submit" value="Relay 2 OFF" onclick="SubmitRelayChange( this, 2, 0 ); return false;" id="2_0" />
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<input type="submit" value="Relay 3 ON" onclick="SubmitRelayChange( this, 3, 1 ); return false;" id="3_1" />
+		</td>
+		<td>
+			<input type="submit" value="Relay 3 OFF" onclick="SubmitRelayChange( this, 3, 0 ); return false;" id="3_0" />
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<input type="submit" value="ALL ON" onclick="SubmitAllChange( this, 1 ); return false;" />
+		</td>
+		<td>
+			<input type="submit" value="ALL OFF" onclick="SubmitAllChange( this, 0 ); return false;" />
+		</td>
+	</tr>
+</table>
+<form action="../cgi-bin/play" method="get"><input type="hidden"
+	name="youtube" value="oShTJ90fC34"> <input type="submit"
+	value="RimShot" /></form>
 </body>
-</HTML>
+</html>
 
