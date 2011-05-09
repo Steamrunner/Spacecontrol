@@ -1,0 +1,21 @@
+<HTML>
+
+<div id="UserOnline">Loading <a href='/Pamela'>Pamela</a>...</div>
+
+<script type="text/javascript">
+function OnlinePamela(User) {
+    var xmlHttp = null;
+    var Url = "/cgi-bin/online?user=" + User;
+
+    xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", Url, false );
+    xmlHttp.send( null );
+
+    document.getElementById( "UserOnline" ).innerHTML = xmlHttp.responseText;
+    setTimeout( function() { LoadPamelaCountWidget(); }, 60000 );
+}
+
+OnlinePamela("audio (server)");
+</script>
+
+</HTML>

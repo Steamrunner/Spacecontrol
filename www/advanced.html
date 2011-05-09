@@ -1,0 +1,190 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+
+"http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<script type="text/javascript" src="yetii.js"></script>
+
+<style type="text/css" media="all">
+	
+	body {
+		font: 0.8em arial, helvetica, sans-serif;
+background:lightgrey;
+	}
+    #tab-container-1 {
+	}
+
+    #tab-container-1 ul {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+    }
+    
+	#tab-container-1 li {
+		float: left;
+		border: 1px solid #bbb;
+		border-bottom-width: 0;
+		margin: 0;
+    }
+    
+	#tab-container-1 a {
+		text-decoration: none;
+		display: block;
+		background: #eee;
+		padding: 0.24em 1em;
+		color: #00c;
+		width: 8em;
+		text-align: center;
+    }
+	
+	#tab-container-1 a:hover {
+		background: #ddf;
+	}
+	
+	#tab-container-1 .activeli {
+		border-color: darkgrey;
+		background: black;
+		color: white;
+	}
+	
+	#tab-container-1 .activeli a {
+		position: relative;
+		top: 1px;
+		background: black;
+		color: white;
+		font-weight: bold;
+	}
+	
+	.tab {
+		border: 1px solid darkgrey;
+		clear: both;
+		padding: 0 0;
+		background: black;
+color: white;
+	}
+	
+	h1 {
+		margin: 0;
+		padding: 0 0 1em 0;
+	}
+	</style>
+</head>
+
+<BODY BgCOLOR="lightgrey">
+<div id="tab-container-1">
+
+    <ul id="tab-container-1-nav">
+    <li><a href="#tab1">Relays</a></li>
+    <li><a href="#tab2">Audio</a></li>
+    <li><a href="#tab3">Inputs</a></li>
+    <li><a href="#tab3">Outputs</a></li>
+    <li><a href="#tab4">Objects</a></li>
+    </ul>
+
+    <div class="tab" id="tab1">
+<table borderstyle=none>
+<tr>
+<td><form action="../cgi-bin/relay" method="get">
+<input type="hidden" name="relay" value="0">
+<input type="hidden" name="value" value="1">
+<input type="submit" value="Relay 0 ON"/>
+</form>
+</td>
+<td>
+<form action="../cgi-bin/relay" method="get">
+<input type="hidden" name="relay" value="0">
+<input type="hidden" name="value" value="0">
+<input type="submit" value="Relay 0 Off"/>
+</form>
+</td>
+</tr>
+<tr>
+<td><form action="../cgi-bin/relay" method="get">
+<input type="hidden" name="relay" value="1">
+<input type="hidden" name="value" value="1">
+<input type="submit" value="Relay 1 ON"/>
+</form>
+</td>
+<td>
+<form action="../cgi-bin/relay" method="get">
+<input type="hidden" name="relay" value="1">
+<input type="hidden" name="value" value="0">
+<input type="submit" value="Relay 1 Off"/>
+</form>
+</td>
+</tr>
+<tr>
+<td><form action="../cgi-bin/relay" method="get">
+<input type="hidden" name="relay" value="2">
+<input type="hidden" name="value" value="1">
+<input type="submit" value="Relay 2 ON"/>
+</form>
+</td>
+<td>
+<form action="../cgi-bin/relay" method="get">
+<input type="hidden" name="relay" value="2">
+<input type="hidden" name="value" value="0">
+<input type="submit" value="Relay 2 Off"/>
+</form>
+</td>
+</tr>
+<tr>
+<td><form action="../cgi-bin/relay" method="get">
+<input type="hidden" name="relay" value="3">
+<input type="hidden" name="value" value="1">
+<input type="submit" value="Relay 3 ON"/>
+</form>
+</td>
+<td>
+<form action="../cgi-bin/relay" method="get">
+<input type="hidden" name="relay" value="3">
+<input type="hidden" name="value" value="0">
+<input type="submit" value="Relay 3 Off"/>
+</form>
+</td>
+</tr>
+<tr>
+<td><form action="../cgi-bin/all" method="get">
+<input type="hidden" name="value" value="1">
+<input type="submit" value="ALL ON"/>
+</form>
+</td>
+<td>
+<form action="../cgi-bin/all" method="get">
+<input type="hidden" name="value" value="0">
+<input type="submit" value="ALL Off"/>
+</form>
+</td>
+</tr>
+</table> 
+    </div>
+    
+    <div class="tab" id="tab2">
+<form action="../cgi-bin/play" method="get">
+<input type="hidden" name="youtube" value="oShTJ90fC34">
+<input type="submit" value="RimShot"/>
+</form>
+	<object data=http://audio.0x20.be width=100% height=870> <embed src=http://www.web-source.net> </embed> Error: Embedded data could not be displayed. </object>
+    </div>
+
+
+    <div class="tab" id="tab3">
+input
+</div>
+    <div class="tab" id="tab4">
+output
+</div>
+    <div class="tab" id="tab5">
+objects
+</div>
+
+</body>
+
+<script type="text/javascript">
+var tabber1 = new Yetii({
+id: 'tab-container-1'
+});
+</script>
+
+</HTML>
+
