@@ -1,5 +1,7 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
-<body bgcolor="darkred">
+<head>
+<script type="text/javascript" src="yetii.js"></script>
 
 <script>
 function SubmitRelayChange( sender, replayNr, replayState ) {
@@ -8,6 +10,16 @@ function SubmitRelayChange( sender, replayNr, replayState ) {
 	var xmlHttp = new XMLHttpRequest();
 	xmlHttp.onreadystatechange = function() { HandleRequestResponse( xmlHttp, sender ); };
 	xmlHttp.open( "GET", "../cgi-bin/relay?relay=" + replayNr.toString() + "&value=" + replayState.toString(), true );
+	xmlHttp.send( null );
+}
+
+function SubmitServerChange( sender, severName ) {
+
+	sender.disabled = true;
+
+	var xmlHttp = new XMLHttpRequest();
+	xmlHttp.onreadystatechange = function() { HandleRequestResponse( xmlHttp, sender ); };
+	xmlHttp.open( "GET", "../cgi-bin/poweroff?server=" + severName.toString(), true );
 	xmlHttp.send( null );
 }
 
@@ -28,53 +40,203 @@ function SubmitAllChange( sender, replayState ) {
 		elements[i].click();
 	}
 }
+
+function OnlinePamela(User, ElementId, ButtonId) {
+    var xmlHttp = null;
+    var Url = "/cgi-bin/online?user=" + User;
+
+    xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", Url, false );
+    xmlHttp.send( null );
+
+    var onlineStatus = xmlHttp.responseText;
+    document.getElementById( ElementId ).innerHTML = onlineStatus;
+    if (onlineStatus.indexOf("ONLINE") == -1) {
+      document.getElementById( ButtonId ).disabled = true;
+    } else {
+      document.getElementById( ButtonId ).disabled = false;
+    }
+    setTimeout( function() { OnlinePamela(User); }, 60000 );
+}
+
 </script>
 
-<table borderstyle="none">
+<style type="text/css" media="all">
+	
+	body {
+		font: 0.8em arial, helvetica, sans-serif;
+		background:lightgrey;
+	}
+	#tab-container-1 {
+	}
+	#tab-container-1 ul {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+    	#tab-container-1 li {
+		float: left;
+		border: 1px solid #bbb;
+		border-bottom-width: 0;
+		margin: 0;
+	}
+    	#tab-container-1 a {
+		text-decoration: none;
+		display: block;
+		background: #eee;
+		padding: 0.24em 1em;
+		color: #00c;
+		width: 8em;
+		text-align: center;
+	}
+	#tab-container-1 a:hover {
+		background: #ddf;
+	}
+	#tab-container-1 .activeli {
+		border-color: darkgrey;
+		background: darkred;
+		color: white;
+	}
+	#tab-container-1 .activeli a {
+		position: relative;
+		top: 1px;
+		background: darkred;
+		color: white;
+		font-weight: bold;
+	}
+	.tab {
+		border: 1px solid darkgrey;
+		clear: both;
+		padding: 0 0;
+		background: darkred;
+		color: white;
+	}
+	h1 {
+		margin: 0;
+		padding: 0 0 1em 0;
+	}
+
+</style>
+
+</head>
+
+<BODY BgCOLOR="lightgrey">
+<div id="tab-container-1">
+
+    <ul id="tab-container-1-nav">
+    <li><a href="#tab1">Relays</a></li>
+    <li><a href="#tab2">Servers</a></li>
+    </ul>
+
+    <div class="tab" id="tab1">
+      <table borderstyle="none">
+	      <tr>
+		      <td>
+			      <input type="submit" value="Relay 0 ON" onclick="SubmitRelayChange( this, 0, 1 ); return false;" id="0_1" />
+		      </td>
+		      <td>
+			      <input type="submit" value="Relay 0 OFF" onclick="SubmitRelayChange( this, 0, 0 ); return false;" id="0_0" />
+		      </td>
+	      </tr>
+	      <tr>
+		      <td>
+			      <input type="submit" value="Relay 1 ON" onclick="SubmitRelayChange( this, 1, 1 ); return false;" id="1_1" />
+		      </td>
+		      <td>
+			      <input type="submit" value="Relay 1 OFF" onclick="SubmitRelayChange( this, 1, 0 ); return false;" id="1_0" />
+		      </td>
+	      </tr>
+	      <tr>
+		      <td>
+			      <input type="submit" value="Relay 2 ON" onclick="SubmitRelayChange( this, 2, 1 ); return false;" id="2_1" />
+		      </td>
+		      <td>
+			      <input type="submit" value="Relay 2 OFF" onclick="SubmitRelayChange( this, 2, 0 ); return false;" id="2_0" />
+		      </td>
+	      </tr>
+	      <tr>
+		      <td>
+			      <input type="submit" value="Relay 3 ON" onclick="SubmitRelayChange( this, 3, 1 ); return false;" id="3_1" />
+		      </td>
+		      <td>
+			      <input type="submit" value="Relay 3 OFF" onclick="SubmitRelayChange( this, 3, 0 ); return false;" id="3_0" />
+		      </td>
+	      </tr>
+	      <tr>
+		      <td>
+			      <br />
+			      <input type="submit" value="ALL ON" onclick="SubmitAllChange( this, 1 ); return false;" />
+		      </td>
+		      <td>
+			      <br />
+			      <input type="submit" value="ALL OFF" onclick="SubmitAllChange( this, 0 ); return false;" />
+		      </td>
+	      </tr>
+      </table>
+      <br />
+      <br />
+      <form action="../cgi-bin/play" method="get">
+	      <input type="hidden" name="youtube" value="oShTJ90fC34">
+	      <input type="submit" value="RimShot" />
+      </form>
+    </div>
+    
+    <div class="tab" id="tab2">
+      <table borderstyle="none">
 	<tr>
 		<td>
-			<input type="submit" value="Relay 0 ON" onclick="SubmitRelayChange( this, 0, 1 ); return false;" id="0_1" />
+			<input type="submit" value="audio (server) OFF" onclick="SubmitServerChange( this, 'audio' ); return false;" id="audioButton" />
 		</td>
 		<td>
-			<input type="submit" value="Relay 0 OFF" onclick="SubmitRelayChange( this, 0, 0 ); return false;" id="0_0" />
+			<div style="float: right" id="audio_Online">Loading <a href='/Pamela'>Pamela</a>...</div>
+			<script type="text/javascript">
+				OnlinePamela("audio (server)", "audio_Online", "audioButton");
+			</script>
 		</td>
 	</tr>
 	<tr>
 		<td>
-			<input type="submit" value="Relay 1 ON" onclick="SubmitRelayChange( this, 1, 1 ); return false;" id="1_1" />
+			<input type="submit" value="steveo (server) OFF" onclick="SubmitServerChange( this, 'steveo' ); return false;" id="steveoButton" />
 		</td>
 		<td>
-			<input type="submit" value="Relay 1 OFF" onclick="SubmitRelayChange( this, 1, 0 ); return false;" id="1_0" />
+			<div style="float: right" id="steveo_Online">Loading <a href='/Pamela'>Pamela</a>...</div>
+			<script type="text/javascript">
+				OnlinePamela("steveo (server)", "steveo_Online", "steveoButton");
+			</script>
 		</td>
 	</tr>
 	<tr>
 		<td>
-			<input type="submit" value="Relay 2 ON" onclick="SubmitRelayChange( this, 2, 1 ); return false;" id="2_1" />
+			<input type="submit" value="CashRegister (server) OFF" onclick="SubmitServerChange( this, 'cashregister' ); return false;" id="CashRegisterButton" />
 		</td>
 		<td>
-			<input type="submit" value="Relay 2 OFF" onclick="SubmitRelayChange( this, 2, 0 ); return false;" id="2_0" />
+			<div style="float: right" id="CashRegister_Online">Loading <a href='/Pamela'>Pamela</a>...</div>
+			<script type="text/javascript">
+				OnlinePamela("CashRegister (server)", "CashRegister_Online", "CashRegisterButton");
+			</script>
 		</td>
 	</tr>
 	<tr>
 		<td>
-			<input type="submit" value="Relay 3 ON" onclick="SubmitRelayChange( this, 3, 1 ); return false;" id="3_1" />
+			<input type="submit" value="Table (furniture) OFF" onclick="SubmitServerChange( this, 'table' ); return false;" id="TableButton" />
 		</td>
 		<td>
-			<input type="submit" value="Relay 3 OFF" onclick="SubmitRelayChange( this, 3, 0 ); return false;" id="3_0" />
+			<div style="float: right" id="Table_Online">Loading <a href='/Pamela'>Pamela</a>...</div>
+			<script type="text/javascript">
+				OnlinePamela("Table (furniture)", "Table_Online", "TableButton");
+			</script>
 		</td>
 	</tr>
-	<tr>
-		<td>
-			<input type="submit" value="ALL ON" onclick="SubmitAllChange( this, 1 ); return false;" />
-		</td>
-		<td>
-			<input type="submit" value="ALL OFF" onclick="SubmitAllChange( this, 0 ); return false;" />
-		</td>
-	</tr>
-</table>
-<form action="../cgi-bin/play" method="get"><input type="hidden"
-	name="youtube" value="oShTJ90fC34"> <input type="submit"
-	value="RimShot" /></form>
+      </table>
+    </div>
+
 </body>
-</html>
+
+<script type="text/javascript">
+var tabber1 = new Yetii({
+id: 'tab-container-1'
+});
+</script>
+
+</HTML>
 
