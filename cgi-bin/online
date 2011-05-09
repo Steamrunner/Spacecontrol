@@ -1,0 +1,43 @@
+#!/bin/bash
+
+echo "Content-type: text/html"
+echo ""
+
+USER=`echo "$QUERY_STRING" | grep -oE "(^|[?&])user=[^&]+" | sed "s/%20/ /g" | cut -f 2 -d "="`
+
+if [ "$USER" == "" ]
+then
+	USER=$1
+fi
+
+RESULT="`wget -qO- http://0x20.be/pam/data`"
+
+RESULT=$(echo $RESULT | tr -d '"[]')
+
+OIFS=$IFS
+IFS=','
+
+NAMES=$RESULT
+
+FOUND=false
+
+for NAME in $NAMES
+do
+	NAME=${NAME## }
+	if [ "$NAME" == "$USER" ]
+	then
+		FOUND=true
+	fi
+done
+
+echo "<div style=\"width: 120px; height:40px; text-align: center; display:table-cell; vertical-align:middle; background-color: "
+if [ $FOUND == true ]
+then
+	echo "green \"> ONLINE"
+else
+	echo "red \"> OFFLINE"
+fi
+echo "</div>"
+
+IFS=$OIFS
+
