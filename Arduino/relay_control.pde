@@ -53,6 +53,8 @@ void loop() {
       Serial.print(relay);
       Serial.print(" set to ");
       Serial.println(relayValue);
+      relay = -1;
+      relayValue = -1;
     }
   }
 }
