@@ -21,6 +21,22 @@ if [ "$OUT" == "all" ]
 then
 	echo '{"ip" : "172.22.32.60", "devices" : [{"type" : "light", "name" : "2 lamps near couch", "out" : "0"}, {"type" : "light", "name" : "floorlamp 1", "out" : "1"}, {"type" : "light", "name" : "floorlamp 2", "out" : "2"}, {"type" : "light", "name" : "floorlamp 3", "out" : "3"}]}'
 else
-	./relay $OUT $STATUS &> /dev/null
-	echo '{"status" : "'$STATUS'", "out": "'$OUT'"}'
+	OK=false
+	if [ "$STATUS" == 1 ] 
+	then
+		STATUS=0
+		OK=true
+	else
+		if [ "$STATUS" == 0 ]
+		then
+			STATUS=1
+			OK=true
+		fi
+	fi
+	if $OK
+	then
+		./relay $OUT $STATUS &> /dev/null
+		echo '{"status" : "'$STATUS'", "out": "'$OUT'"}'
+# else should generate an error
+	fi
 fi
