@@ -1,0 +1,19 @@
+#!/bin/bash
+
+echo "Content-type: text/html"
+echo ""
+
+SERVER=`echo "$QUERY_STRING" | grep -oE "(^|[?&])server=[^&]+" | sed "s/%20/ /g" | cut -f 2 -d "="`
+
+if [ "$SERVER" == "" ]
+then
+	SERVER=$1
+fi
+
+if [ "$SERVER" != "" ]
+then
+
+	wakeonlan $SERVER
+
+fi
+echo '<head><meta HTTP-EQUIV="REFRESH" content="0; url=http://spacecontrol.0x20.be"></head>'
