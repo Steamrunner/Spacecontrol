@@ -13,13 +13,18 @@ function SubmitRelayChange( sender, replayNr, replayState ) {
 	xmlHttp.send( null );
 }
 
-function SubmitServerChange( sender, severName ) {
+function SubmitServerChange( sender, severName, serverState ) {
 
 	sender.disabled = true;
-
 	var xmlHttp = new XMLHttpRequest();
 	xmlHttp.onreadystatechange = function() { HandleRequestResponse( xmlHttp, sender ); };
-	xmlHttp.open( "GET", "../cgi-bin/poweroff?server=" + severName.toString(), true );
+	
+	if (serverState == 0) {
+		xmlHttp.open( "GET", "../cgi-bin/poweroff?server=" + severName.toString(), true );
+	} else if (serverState == 1) {
+		xmlHttp.open( "GET", "../cgi-bin/poweron?server=" + severName.toString(), true );
+	}
+
 	xmlHttp.send( null );
 }
 
@@ -41,7 +46,7 @@ function SubmitAllChange( sender, replayState ) {
 	}
 }
 
-function OnlinePamela(User, ElementId, ButtonId) {
+function OnlinePamela(User, ElementId, ButtonIdOff, ButtonIdOn) {
     var xmlHttp = null;
     var Url = "/cgi-bin/online?user=" + User;
 
@@ -52,9 +57,11 @@ function OnlinePamela(User, ElementId, ButtonId) {
     var onlineStatus = xmlHttp.responseText;
     document.getElementById( ElementId ).innerHTML = onlineStatus;
     if (onlineStatus.indexOf("ONLINE") == -1) {
-      document.getElementById( ButtonId ).disabled = true;
+      document.getElementById( ButtonIdOff ).disabled = true;
+      document.getElementById( ButtonIdOn ).disabled = false;
     } else {
-      document.getElementById( ButtonId ).disabled = false;
+      document.getElementById( ButtonIdOff ).disabled = false;
+      document.getElementById( ButtonIdOn ).disabled = true;
     }
     setTimeout( function() { OnlinePamela(User); }, 60000 );
 }
@@ -124,17 +131,9 @@ function OnlinePamela(User, ElementId, ButtonId) {
 <div id="tab-container-1">
 
     <ul id="tab-container-1-nav">
-    <li><a href="#tab3">HomeAutomation</a></li>
-    <li><a href="#tab1">Relays</a></li>
-    <li><a href="#tab2">Servers</a></li>
+    <li><a href="#tab1">Small Spacecontrol</a></li>
+    <li><a href="#tab2">Software Spacecontrol</a></li>
     </ul>
-
-    <div class="tab" id="tab1">
-      <center><p>Maybe you should try to login using "Whitespace" / "unicorns"</p>
-      <iframe height="800" width="95%" frameBorder="0" src="http://cashregister/homeautomation">your browser does not support IFRAMEs</iframe> 
-      <center><p>If not apears here you should boot cashregister.</p></center>
-      </center> 
-    </div>
 
     <div class="tab" id="tab1">
       <table borderstyle="none">
@@ -193,45 +192,57 @@ function OnlinePamela(User, ElementId, ButtonId) {
       <table borderstyle="none">
 	<tr>
 		<td>
-			<input type="submit" value="audio (server) OFF" onclick="SubmitServerChange( this, 'audio' ); return false;" id="audioButton" />
+			<input type="submit" value="audio (server) ON" onClick="SubmitServerChange( this, '00:0e:a6:0c:4e:3a', 1 ); return false;" id="audioOnButton" disabled="true" />
+		</td>
+		<td>
+			<input type="submit" value="audio (server) OFF" onclick="SubmitServerChange( this, 'audio', 0 ); return false;" id="audioOffButton" />
 		</td>
 		<td>
 			<div style="float: right" id="audio_Online">Loading <a href='/Pamela'>Pamela</a>...</div>
 			<script type="text/javascript">
-				OnlinePamela("audio (server)", "audio_Online", "audioButton");
+				OnlinePamela("audio (server)", "audio_Online", "audioOffButton", null);
 			</script>
 		</td>
 	</tr>
 	<tr>
 		<td>
-			<input type="submit" value="steveo (server) OFF" onclick="SubmitServerChange( this, 'steveo' ); return false;" id="steveoButton" />
+			<input type="submit" value="steveo (server) ON" onClick="SubmitServerChange( this, '00:0e:a6:0c:4e:3a', 1 ); return false;" id="steveoOnButton" disabled="true" />
+		</td>
+		<td>
+			<input type="submit" value="steveo (server) OFF" onclick="SubmitServerChange( this, 'steveo', 0 ); return false;" id="steveoOffButton" />
 		</td>
 		<td>
 			<div style="float: right" id="steveo_Online">Loading <a href='/Pamela'>Pamela</a>...</div>
 			<script type="text/javascript">
-				OnlinePamela("steveo (server)", "steveo_Online", "steveoButton");
+				OnlinePamela("steveo (server)", "steveo_Online", "steveoOffButton", null);
 			</script>
 		</td>
 	</tr>
 	<tr>
 		<td>
-			<input type="submit" value="CashRegister (server) OFF" onclick="SubmitServerChange( this, 'cashregister' ); return false;" id="CashRegisterButton" />
+			<input type="submit" value="CashRegister (server) ON" onClick="SubmitServerChange( this, '00:0e:a6:0c:4e:3a', 1 ); return false;" id="CashRegisterOnButton" />
+		</td>
+		<td>
+			<input type="submit" value="CashRegister (server) OFF" onclick="SubmitServerChange( this, 'cashregister', 0 ); return false;" id="CashRegisterOffButton" />
 		</td>
 		<td>
 			<div style="float: right" id="CashRegister_Online">Loading <a href='/Pamela'>Pamela</a>...</div>
 			<script type="text/javascript">
-				OnlinePamela("CashRegister (server)", "CashRegister_Online", "CashRegisterButton");
+				OnlinePamela("CashRegister (server)", "CashRegister_Online", "CashRegisterOffButton", "CashRegisterOnButton");
 			</script>
 		</td>
 	</tr>
 	<tr>
 		<td>
-			<input type="submit" value="Table (furniture) OFF" onclick="SubmitServerChange( this, 'table' ); return false;" id="TableButton" />
+			<input type="submit" value="Table (furniture) ON" onClick="SubmitServerChange( this, '00:0e:a6:0c:4e:3a', 1 ); return false;" id="TableOffButton" disabled="true" />
+		</td>
+		<td>
+			<input type="submit" value="Table (furniture) OFF" onclick="SubmitServerChange( this, 'table', 0 ); return false;" id="TableOnButton" />
 		</td>
 		<td>
 			<div style="float: right" id="Table_Online">Loading <a href='/Pamela'>Pamela</a>...</div>
 			<script type="text/javascript">
-				OnlinePamela("Table (furniture)", "Table_Online", "TableButton");
+				OnlinePamela("Table (furniture)", "Table_Online", "TableOffButton", null);
 			</script>
 		</td>
 	</tr>

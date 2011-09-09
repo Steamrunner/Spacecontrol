@@ -13,7 +13,7 @@ fi
 if [ "$SERVER" != "" ]
 then
 
-	ssh -l pamela -o StrictHostKeyChecking=no -T -n $SERVER "sudo poweroff" 
+	ssh -l pamela -o StrictHostKeyChecking=no -T -n $SERVER "sudo ./SC_poweroff.sh" 
 
 fi
 echo '<head><meta HTTP-EQUIV="REFRESH" content="0; url=http://spacecontrol.0x20.be"></head>'
