@@ -180,12 +180,6 @@ function OnlinePamela(User, ElementId, ButtonIdOff, ButtonIdOn) {
 		      </td>
 	      </tr>
       </table>
-      <br />
-      <br />
-      <form action="../cgi-bin/play" method="get">
-	      <input type="hidden" name="youtube" value="oShTJ90fC34">
-	      <input type="submit" value="RimShot" />
-      </form>
     </div>
     
     <div class="tab" id="tab2">
@@ -206,20 +200,6 @@ function OnlinePamela(User, ElementId, ButtonIdOff, ButtonIdOn) {
 	</tr>
 	<tr>
 		<td>
-			<input type="submit" value="steveo (server) ON" onClick="SubmitServerChange( this, '00:0e:a6:0c:4e:3a', 1 ); return false;" id="steveoOnButton" disabled="true" />
-		</td>
-		<td>
-			<input type="submit" value="steveo (server) OFF" onclick="SubmitServerChange( this, 'steveo', 0 ); return false;" id="steveoOffButton" />
-		</td>
-		<td>
-			<div style="float: right" id="steveo_Online">Loading <a href='/Pamela'>Pamela</a>...</div>
-			<script type="text/javascript">
-				OnlinePamela("steveo (server)", "steveo_Online", "steveoOffButton", null);
-			</script>
-		</td>
-	</tr>
-	<tr>
-		<td>
 			<input type="submit" value="CashRegister (server) ON" onClick="SubmitServerChange( this, '00:0e:a6:0c:4e:3a', 1 ); return false;" id="CashRegisterOnButton" />
 		</td>
 		<td>
@@ -229,6 +209,20 @@ function OnlinePamela(User, ElementId, ButtonIdOff, ButtonIdOn) {
 			<div style="float: right" id="CashRegister_Online">Loading <a href='/Pamela'>Pamela</a>...</div>
 			<script type="text/javascript">
 				OnlinePamela("CashRegister (server)", "CashRegister_Online", "CashRegisterOffButton", "CashRegisterOnButton");
+			</script>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<input type="submit" value="steveo (server) ON" onClick="SubmitServerChange( this, '00:0e:a6:0c:4e:3a', 1 ); return false;" id="steveoOnButton" disabled="true" />
+		</td>
+		<td>
+			<input type="submit" value="steveo (server) OFF" onclick="SubmitServerChange( this, 'steveo', 0 ); return false;" id="steveoOffButton" />
+		</td>
+		<td>
+			<div style="float: right" id="steveo_Online">Loading <a href='/Pamela'>Pamela</a>...</div>
+			<script type="text/javascript">
+				OnlinePamela("steveo (server)", "steveo_Online", "steveoOffButton", null);
 			</script>
 		</td>
 	</tr>
@@ -247,6 +241,12 @@ function OnlinePamela(User, ElementId, ButtonIdOff, ButtonIdOn) {
 		</td>
 	</tr>
       </table>
+      <br />
+      <br />
+      <form action="../cgi-bin/play" method="get">
+	      <input type="hidden" name="youtube" value="oShTJ90fC34">
+	      <input type="submit" value="RimShot" />
+      </form>
     </div>
 
 </body>
