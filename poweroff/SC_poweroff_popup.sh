@@ -24,5 +24,5 @@ echo "15"; echo "#This system will be shutdown by Spacecontrol in 3 seconds.\nCl
 echo "10"; echo "#This system will be shutdown by Spacecontrol in 2 seconds.\nClick cancel to abort."; sleep 1
 echo "5"; echo "#This system will be shutdown by Spacecontrol in 1 seconds.\nClick cancel to abort."; sleep 1
 ) |
-zenity --progress --title="Spacecontrol Poweroff" --text="The Space and this system will be shutdown by Spacecontrol in 20 seconds. \nClick cancel to abort shutdown." --percentage=100 --auto-close
+sudo -u whitespace zenity --progress --title="Spacecontrol Poweroff" --text="The Space and this system will be shutdown by Spacecontrol in 20 seconds. \nClick cancel to abort shutdown." --percentage=100 --auto-close
 
