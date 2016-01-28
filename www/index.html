@@ -117,10 +117,15 @@ function OnlinePamela(User, ElementId, ButtonIdOff, ButtonIdOn) {
 		padding: 0 0;
 		background: darkred;
 		color: white;
+		height: 290px;
 	}
 	h1 {
 		margin: 0;
 		padding: 0 0 1em 0;
+	}
+	.bottom {
+		position: absolute;
+		top: 330px;
 	}
 
 </style>
@@ -132,7 +137,8 @@ function OnlinePamela(User, ElementId, ButtonIdOff, ButtonIdOn) {
 
     <ul id="tab-container-1-nav">
     <li><a href="#tab1">Small Spacecontrol</a></li>
-    <li><a href="#tab2">Software Spacecontrol</a></li>
+    <li><a href="#tab2">Big <br />Spacecontrol</a></li>
+    <li><a href="#tab3">Software Spacecontrol</a></li>
     </ul>
 
     <div class="tab" id="tab1">
@@ -181,8 +187,47 @@ function OnlinePamela(User, ElementId, ButtonIdOff, ButtonIdOn) {
 	      </tr>
       </table>
     </div>
-    
+
     <div class="tab" id="tab2">
+      <table borderstyle="none">
+	      <tr>
+		      <td>
+			      <input type="submit" value="Relay 0 ON" onclick="SubmitRelayChange( this, 0, 1 ); return false;" id="0_1" />
+		      </td>
+		      <td>
+			      <input type="submit" value="Relay 0 OFF" onclick="SubmitRelayChange( this, 0, 0 ); return false;" id="0_0" />
+		      </td>
+	      </tr>
+	      <tr>
+		      <td>
+			      <input type="submit" value="Relay 1 ON" onclick="SubmitRelayChange( this, 1, 1 ); return false;" id="1_1" />
+		      </td>
+		      <td>
+			      <input type="submit" value="Relay 1 OFF" onclick="SubmitRelayChange( this, 1, 0 ); return false;" id="1_0" />
+		      </td>
+	      </tr>
+	      <tr>
+		      <td>
+			      <input type="submit" value="Relay 2 ON" onclick="SubmitRelayChange( this, 2, 1 ); return false;" id="2_1" />
+		      </td>
+		      <td>
+			      <input type="submit" value="Relay 2 OFF" onclick="SubmitRelayChange( this, 2, 0 ); return false;" id="2_0" />
+		      </td>
+	      </tr>
+	      <tr>
+		      <td>
+			      <br />
+			      <input type="submit" value="ALL ON" onclick="SubmitAllChange( this, 1 ); return false;" />
+		      </td>
+		      <td>
+			      <br />
+			      <input type="submit" value="ALL OFF" onclick="SubmitAllChange( this, 0 ); return false;" />
+		      </td>
+	      </tr>
+      </table>
+    </div>
+    
+    <div class="tab" id="tab3">
       <table borderstyle="none">
 	<tr>
 		<td>
@@ -248,6 +293,17 @@ function OnlinePamela(User, ElementId, ButtonIdOff, ButtonIdOn) {
 	      <input type="submit" value="RimShot" />
       </form>
     </div>
+
+
+
+      <table class="bottom">
+	      <tr>
+		      <td>
+			      <br />
+			      <input type="submit" value="SHUTDOWN SEQUENCE" onclick="SubmitAllChange( this, 0 ); return false;" />
+		      </td>
+	      </tr>
+      </table>
 
 </body>
 

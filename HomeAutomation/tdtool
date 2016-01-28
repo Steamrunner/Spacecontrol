@@ -1,0 +1,27 @@
+#!/bin/bash
+
+if [[ ($1 == "--list") || ($1 == "-l") ]]
+then
+	echo "Number of devices: 4"
+	echo "1	2 lamps near couch	OFF"
+	echo "2	floorlamp 1	OFF"
+	echo "3	floorlamp 2	OFF"
+	echo "4	floorlamp 3	OFF"
+else
+while (( "$#" ))
+do	
+	if [[ ($1 == "--on") || ($1 == "-n") ]]
+	then
+		let relay=$(($2 - 1))
+		curl "http://spacecontrol.0x20.be/cgi-bin/relay?relay=$relay&value=1"
+	elif [[ ($1 == "--off") || ($1 == "-f") ]]
+	then
+		let relay=$(($2 - 1))
+		curl "http://spacecontrol.0x20.be/cgi-bin/relay?relay=$relay&value=0"
+	fi
+	
+	shift
+	shift
+done
+
+fi

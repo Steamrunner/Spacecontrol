@@ -4,14 +4,14 @@
 echo "`date`      script started." >> SC_poweroff.log
 
 #find desktop user if any
-user=`who | grep tty`
+user=`who | grep :0`
 set -- $user
 user=$1
 
 echo "`date`      logged in user \"$user\" found" >> SC_poweroff.log
 
 #showing the countdown/cancel window
-su $user -c "./SC_poweroff_popup.sh"
+sudo su $user -c "./SC_poweroff_popup.sh"
 
 if [ $? = 1 ] ; then
 	echo "`date`      Poweroff canceled" >> SC_poweroff.log
