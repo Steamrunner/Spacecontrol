@@ -11,7 +11,7 @@ user=$1
 echo "`date`      logged in user \"$user\" found" >> SC_poweroff.log
 
 #showing the countdown/cancel window
-sudo -s -u $user "./SC_poweroff_popup.sh"
+sudo -H -u $user /home/shutdownuser/spacecontrol/poweroff/SC_poweroff_popup.sh $user
 
 if [ $? = 1 ] ; then
 	echo "`date`      Poweroff canceled by local user" >> SC_poweroff.log

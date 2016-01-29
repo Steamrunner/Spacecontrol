@@ -1,6 +1,7 @@
 #!/bin/bash
 
 export DISPLAY=:0.0
+xhost local:$1
 
 (
 echo "99"; echo "#This system will be shutdown by Spacecontrol in 20 seconds.\nClick cancel to abort."; sleep 1
