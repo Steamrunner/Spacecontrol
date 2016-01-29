@@ -8,7 +8,12 @@ user=`who | grep :0`
 set -- $user
 user=$1
 
-echo "`date`      logged in user \"$user\" found" >> SC_poweroff.log
+if [ -z $user ] ; then
+	echo "`date`      No logged in user found" >> SC_poweroff.log
+	exit 0
+fi
+
+echo "`date`      Logged in user \"$user\" found" >> SC_poweroff.log
 
 #showing the countdown/cancel window
 sudo -H -u $user /home/shutdownuser/spacecontrol/poweroff/SC_poweroff_popup.sh $user
