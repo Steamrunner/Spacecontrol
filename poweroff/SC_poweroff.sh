@@ -15,10 +15,10 @@ sudo -H -u $user /home/shutdownuser/spacecontrol/poweroff/SC_poweroff_popup.sh $
 
 if [ $? = 1 ] ; then
 	echo "`date`      Poweroff canceled by local user" >> SC_poweroff.log
-	/usr/bin/wget -qO- "http://unipi:8080/CMD?Abort=ON" >> /dev/null
+	/usr/bin/wget -qO- "http://unipi:8080/CMD?AbortShutdown=ON" >> /dev/null
 	exit 1
 else
-	abort=`wget -qO- "http://unipi:8080/rest/items/Abort/state"`
+	abort=`wget -qO- "http://unipi:8080/rest/items/AbortShutdown/state"`
 
 	if [ $abort = "OFF" ] ; then
 	        echo "`date`      Powering down system" >> SC_poweroff.log
