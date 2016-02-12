@@ -1,6 +1,8 @@
 #!/bin/bash
 
-export DISPLAY=:1.0
+# make sure this script is ran as the right user!!!!!
+
+export DISPLAY=$2
 xhost local:$1
 
 (

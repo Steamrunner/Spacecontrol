@@ -4,7 +4,7 @@
 echo "`date`      script started." >> SC_poweroff.log
 
 #find desktop user if any
-user=`who | grep :0`
+user=`who | grep :1`
 set -- $user
 user=$1
 
