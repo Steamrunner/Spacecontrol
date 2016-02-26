@@ -2,9 +2,16 @@
 
 whoResults=$(who | grep '(:[0-9])')
 
-echo 'whoResults' $whoResults 'end'
+echo -e "whoResults\n${whoResults}\nend"
 
-if [ "$whoResults" = $'\n' ] ; then
+IFS='\n' readarray array <<< "$whoResults"
+
+echo "array0:" $array[0]
+echo "array1:" $array[1]
+echo "array lenght: ${#array[@]}"
+
+
+if [ "$whoResults" = $'\c' ] ; then
   echo "FOUND NEWLINE"
 fi
 
