@@ -43,7 +43,7 @@ if [ $exitcode = 1 ] ; then
 else
 	# shutdown was NOT aborted on this machine
 	# check if shutdown was not aborted on spacecontrol
-        abort=`wget -qO- "http://unipi:8080/rest/items/AbortShutdown/state"`
+        abort=`wget -qO- "http://unipi:8080/rest/items/abortShutdown/state"`
 
         if [ $abort = "OFF" ] ; then
                 echo "`date`      Powering down system" >> SC_poweroff.log
