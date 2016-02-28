@@ -38,7 +38,7 @@ if [ $exitcode = 1 ] ; then
 	# shutdown was aborted by a user on this machine
 	# set abortShutdown in spacecontrol to ON
         echo "`date`      Poweroff canceled by local user" >> SC_poweroff.log
-        /usr/bin/wget -qO- "http://unipi:8080/CMD?AbortShutdown=ON" >> /dev/null
+        /usr/bin/wget -qO- "http://unipi:8080/CMD?abortShutdown=ON" >> /dev/null
         exit 1
 else
 	# shutdown was NOT aborted on this machine
