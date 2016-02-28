@@ -1,6 +1,6 @@
 #!/bin/bash
 
-whoResults=$(who | grep '(:[0-9])')
+whoResults=$(who | grep ' :[0-9]')
 
 echo -e "whoResults\n${whoResults}\nend"
 
