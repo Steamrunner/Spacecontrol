@@ -4,7 +4,7 @@
 echo "`date`      script started." >> SC_poweroff.log
 
 # get a list of users logged into a graphical session
-whoResults=$(who | grep ' :[0-9]')
+whoResults=$(who | grep '(:[0-9])')
 
 # transform the result string into an array
 IFS='\n' readarray whoArray <<< "$whoResults"
