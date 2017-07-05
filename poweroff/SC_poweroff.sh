@@ -22,8 +22,10 @@ fi
 pids=()
 for i in "${whoArray[@]}" ; do
 	set -- $i
-	echo "`date`      Logged in user \"$1\" on display \"$2\" found" >> SC_poweroff.log
-	sudo -H -u $1 /home/shutdownuser/spacecontrol/poweroff/SC_poweroff_popup.sh $1 $2 &
+	echo "`date`      Logged in user \"$1\" on display \"${!#:1:2}\" found" >> SC_poweroff.log
+	SUBSTRING=$(echo ${!#:1:2})
+	echo $SUBSTRING
+	sudo -H -u $1 /home/shutdownuser/spacecontrol/poweroff/SC_poweroff_popup.sh $1 ${!#:1:2} &
 	pids+=($!)
 done
 
