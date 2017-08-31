@@ -49,10 +49,8 @@ else
 
         if [ $abort = "OFF" ] ; then
                 echo "`date`      Powering down system" >> SC_poweroff.log
-		echo "trying shutdown"
 		sudo /sbin/shutdown -h now
 		if [ $? -ne 0 ] ; then
-			echo "trying systemctl"
 			systemctl poweroff -i
 		fi
         else
