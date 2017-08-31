@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# install some needed and some usefull stuff
+apt install git screen vim whois
+
 # generate random password
 password=$(date +%s | sha256sum | base64 | head -c 32)
 echo $password
@@ -16,9 +19,6 @@ echo "------------------------------------"
 useradd -m -p $encryptedPassword -s /bin/bash shutdownuser
 
 exit 0
-
-# install some needed and some usefull stuff
-apt install git screen vim
 
 # 
 cd /home/shutdownuser
