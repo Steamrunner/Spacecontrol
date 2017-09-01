@@ -51,12 +51,12 @@ echo
 echo "CONNECTING TO THE SPACECONTROL SERVER"
 # ssh to spacecontrol server
 
-sshpass -p unicorns ssh -o StrictHostKeyChecking=no pi@kimball "
+# get local ip
+ip=$(ifconfig | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p')
 
-touch test
-
-touch test2
-
-"
 # copy the key form server to new client
+sshpass -p unicorns ssh -o StrictHostKeyChecking=no pi@kimball "
+sudo -u openhab sshpass -p $password ssh-copy-id shutdownuser@$ip
+"
+
 # generate line to be added to openhab config file
