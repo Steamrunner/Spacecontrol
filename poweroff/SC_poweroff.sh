@@ -47,7 +47,7 @@ else
 	# check if shutdown was not aborted on spacecontrol
         abort=`wget -qO- "http://unipi:8080/rest/items/abortShutdown/state"`
 
-        if [ $abort = "OFF" ] ; then
+        if [ $abort -eq "OFF" ] ; then
                 echo "`date`      Powering down system" >> SC_poweroff.log
 		sudo /sbin/shutdown -h now
 		if [ $? -ne 0 ] ; then
