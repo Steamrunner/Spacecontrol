@@ -10,9 +10,10 @@ for i in `seq 20 -1 1`;
 do
         abort=`wget -qO- "http://unipi:8080/rest/items/abortShutdown/state"`
 
-        if [ $abort = "ON" ] ; then
+        if [ "$abort" = "ON" ] ; then
 		exit 1
 	fi
+
 	seqNumber=$((5*$i))
 	if [ $seqNumber = 100 ] ; then
 		seqNumber=$((99))
