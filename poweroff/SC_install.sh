@@ -45,6 +45,7 @@ echo
 echo "RUNNING VISUDO"
 # add the right priviliges to sudoers file
 echo 'shutdownuser ALL = NOPASSWD: /sbin/shutdown' | sudo EDITOR='tee -a' visudo
+echo 'shutdownuser ALL = NOPASSWD: /bin/systemctl' | sudo  EDITOR='tee -a' visudo
 echo 'shutdownuser ALL=(ALL:ALL) NOPASSWD:/home/shutdownuser/spacecontrol/poweroff/SC_poweroff_popup.sh' | sudo EDITOR='tee -a' visudo
 echo
 
