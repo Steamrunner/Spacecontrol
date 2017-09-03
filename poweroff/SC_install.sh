@@ -66,7 +66,7 @@ echo "CONNECTING TO THE UNIPI SERVER"
 # ssh to spacecontrol server
 
 # copy the key form server to new client
-sshpass -p unicorns ssh -o StrictHostKeyChecking=no pi@unipi "
+sshpass -p raspberry ssh -o StrictHostKeyChecking=no pi@unipi "
 sudo -u openhab sshpass -p $password ssh-copy-id shutdownuser@$ip
 "
 
