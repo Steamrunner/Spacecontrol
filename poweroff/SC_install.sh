@@ -51,13 +51,16 @@ echo
 # get local ip
 ip=$(ifconfig | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p')
 echo "this machines IP: $ip"
+hostname=`cat /etc/hostname`
+echo "this machines hostname: $hostname"
+echo 
 
 echo "CONNECTING TO THE SPACECONTROL SERVER"
 # ssh to spacecontrol server
 
 # copy the key form server to new client
 sshpass -p unicorns ssh -o StrictHostKeyChecking=no pi@kimball "
-sudo -u openhab sshpass -p $password ssh-copy-id -o StrictHostKeyChecking=no shutdownuser@$ip
+sudo -u openhab sshpass -p $password ssh-copy-id -o StrictHostKeyChecking=no shutdownuser@$hostname
 "
 #sudo -u openhab sshpass -p $password ssh -o StrictHostKeyChecking=no shutdownuser@$ip exit
 
@@ -66,7 +69,7 @@ echo "CONNECTING TO THE UNIPI SERVER"
 
 # copy the key form server to new client
 sshpass -p raspberry ssh -o StrictHostKeyChecking=no pi@unipi "
-sudo -u openhab sshpass -p $password ssh-copy-id -o StrictHostKeyChecking=no shutdownuser@$ip
+sudo -u openhab sshpass -p $password ssh-copy-id -o StrictHostKeyChecking=no shutdownuser@$hostname
 "
 #sudo -u openhab sshpass -p $password ssh -o StrictHostKeyChecking=no shutdownuser@$ip exit
 
