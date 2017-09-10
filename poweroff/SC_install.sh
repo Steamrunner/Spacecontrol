@@ -38,7 +38,7 @@ git pull origin master
 
 # set file owner to the new user
 cd ..
-chown -R shutdownuser:shutdownuser Spacecontrol
+chown -R shutdownuser:shutdownuser spacecontrol
 echo
 
 echo "RUNNING VISUDO"
@@ -50,23 +50,24 @@ echo
 
 # get local ip
 ip=$(ifconfig | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p')
+echo "this machines IP: $ip"
 
 echo "CONNECTING TO THE SPACECONTROL SERVER"
 # ssh to spacecontrol server
 
 # copy the key form server to new client
 sshpass -p unicorns ssh -o StrictHostKeyChecking=no pi@kimball "
-sudo -u openhab sshpass -p $password ssh-copy-id shutdownuser@$ip
-sudo -u openhab sshpass -p $password ssh StrictHostKeyChecking=no shutdownuser@$ip
+sudo -u openhab sshpass -p $password ssh-copy-id -o StrictHostKeyChecking=no shutdownuser@$ip
 "
+#sudo -u openhab sshpass -p $password ssh -o StrictHostKeyChecking=no shutdownuser@$ip exit
 
 echo "CONNECTING TO THE UNIPI SERVER"
-# ssh to spacecontrol server
+# ssh to unipi server
 
 # copy the key form server to new client
 sshpass -p raspberry ssh -o StrictHostKeyChecking=no pi@unipi "
-sudo -u openhab sshpass -p $password ssh-copy-id shutdownuser@$ip
-sudo -u openhab sshpass -p $password ssh StrictHostKeyChecking=no shutdownuser@$ip 
+sudo -u openhab sshpass -p $password ssh-copy-id -o StrictHostKeyChecking=no shutdownuser@$ip
 "
+#sudo -u openhab sshpass -p $password ssh -o StrictHostKeyChecking=no shutdownuser@$ip exit
 
 # generate line to be added to openhab & unipi config file
