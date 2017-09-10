@@ -28,8 +28,8 @@ echo
 echo "RUNNING GIT"
 # create the git repo, make sure only the right directory 
 # is downloaded, and pull in the code
-mkdir Spacecontrol
-cd Spacecontrol
+mkdir spacecontrol
+cd spacecontrol
 git init
 git remote add -f origin https://github.com/Steamrunner/Spacecontrol.git
 git config core.sparseCheckout true
@@ -39,9 +39,6 @@ git pull origin master
 # set file owner to the new user
 cd ..
 chown -R shutdownuser:shutdownuser Spacecontrol
-
-# because I did something wierd with the capital letter...
-mv Spacecontrol spacecontrol
 echo
 
 echo "RUNNING VISUDO"
