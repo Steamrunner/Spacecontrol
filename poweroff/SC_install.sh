@@ -57,6 +57,7 @@ echo "CONNECTING TO THE SPACECONTROL SERVER"
 # copy the key form server to new client
 sshpass -p unicorns ssh -o StrictHostKeyChecking=no pi@kimball "
 sudo -u openhab sshpass -p $password ssh-copy-id shutdownuser@$ip
+sudo -u openhab sshpass -p $password ssh StrictHostKeyChecking=no shutdownuser@$ip
 "
 
 echo "CONNECTING TO THE UNIPI SERVER"
@@ -65,6 +66,7 @@ echo "CONNECTING TO THE UNIPI SERVER"
 # copy the key form server to new client
 sshpass -p raspberry ssh -o StrictHostKeyChecking=no pi@unipi "
 sudo -u openhab sshpass -p $password ssh-copy-id shutdownuser@$ip
+sudo -u openhab sshpass -p $password ssh StrictHostKeyChecking=no shutdownuser@$ip 
 "
 
 # generate line to be added to openhab & unipi config file
