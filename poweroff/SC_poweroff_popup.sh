@@ -6,7 +6,7 @@ export DISPLAY=$2
 xhost local:$1
 
 (
-for i in `seq 20 -1 1`;
+for i in `seq 200 -1 1`;
 do
         abort=`wget -qO- "http://unipi:8080/rest/items/abortShutdown/state"`
 
@@ -20,7 +20,7 @@ do
 	fi
 	echo $seqNumber
 	echo "#This system will be shutdown by Spacecontrol in $i seconds.\nClick cancel to abort."
-	sleep 1
+	sleep 0.1
 done
-) | zenity --progress --title="Spacecontrol Poweroff" --text="The Space and this system will be shutdown by Spacecontrol in 20 seconds. \nClick cancel to abort shutdown." --percentage=100 --auto-close
+) | zenity --progress --title="Spacecontrol Poweroff" --text="The Space and this system will be shutdown by Spacecontrol in 20 seconds. \nClick cancel to abort shutdown." --percentage=1000 --auto-close
 
