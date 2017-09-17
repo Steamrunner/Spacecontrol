@@ -6,3 +6,5 @@ To install the small spacecontrol shutdown script on a new PC please run:
 
 Tested on ubuntu 16.04 and 14.04.
 
+This script creates the "shutdownuser" on the client machine, adds the necessary rules to the sudoers file, downloads the script itself to the and installs ssh keys on unipi and kimball. After this script is run on a new client modify the openhab configuration on unipi and kimball to include the new machine. This should be completely analogous to the other machines already in the system.
+
