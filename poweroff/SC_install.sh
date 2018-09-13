@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # script to install the shutdown scripts on a new PC
 # to uninstall just run: userdel -r shutdownuser and
@@ -7,7 +7,7 @@
 
 # install some needed and some usefull stuff
 echo "RUNNING APT"
-apt --assume-yes install git screen vim whois openssh-server sshpass
+apt --assume-yes install git screen vim whois openssh-server sshpass net-tools
 echo
 
 echo "CREATING USER"
@@ -23,6 +23,10 @@ useradd -m -p $encryptedPassword -s /bin/bash shutdownuser
 
 # move to new new users home dir
 cd /home/shutdownuser
+echo
+
+# make sure new user isn't shown on login screen
+echo -e "[User]\nSystemAccount=true" > /var/lib/AccountsService/users/shutdownuser
 echo
 
 echo "RUNNING GIT"
@@ -74,3 +78,4 @@ sudo -u openhab sshpass -p $password ssh-copy-id -o StrictHostKeyChecking=no shu
 #sudo -u openhab sshpass -p $password ssh -o StrictHostKeyChecking=no shutdownuser@$ip exit
 
 # generate line to be added to openhab & unipi config file
+
