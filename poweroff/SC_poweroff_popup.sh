@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # make sure this script is ran as the right user!!!!!
 

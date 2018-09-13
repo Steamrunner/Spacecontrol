@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 #log to script
 echo "`date`      script started." >> SC_poweroff.log
