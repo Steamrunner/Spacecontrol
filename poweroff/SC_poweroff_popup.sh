@@ -2,6 +2,9 @@
 
 # make sure this script is ran as the right user!!!!!
 
+# for debian 10 using i3:
+export XAUTHORITY=/home/$1/.Xauthority
+
 export DISPLAY=$2
 xhost local:$1
 
