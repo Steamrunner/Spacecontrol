@@ -12,9 +12,6 @@ whoResults=$(who | grep '(:[0-9])')
 # transform the result string into an array
 IFS='\n' readarray whoArray <<< "$whoResults"
 
-
-echo $whoArray >> $log
-
 # stop the program if no one is logged in
 # if no one is logged in this code returns an array containing empty element 
 if [ ${#whoArray[@]} == 1 ] ; then
@@ -22,7 +19,7 @@ if [ ${#whoArray[@]} == 1 ] ; then
 		# check for tty1
 		whoResults=$(who | grep 'tty1')
 		whoResults="$whoResults (:0)"
-		echo $whoArray >> $log
+		IFS='\n' readarray whoArray <<< "$whoResults"
 		if [ "$(echo -ne ${whoArray} | wc -m)" -eq 0 ]; then
 			# still nothing:
 	        	echo "`date`      No logged in user found" >> $log
@@ -62,10 +59,10 @@ else
 
 #        if [ "$abort" = "OFF" ] ; then
                 echo "`date`      Powering down system" >> $log
-#		sudo /sbin/shutdown -h now
-#		if [ $? -ne 0 ] ; then
-#			systemctl poweroff -i
-#		fi
+		sudo /sbin/shutdown -h now
+		if [ $? -ne 0 ] ; then
+			systemctl poweroff -i
+		fi
 #        else
 #                echo "`date`      Poweroff cancelled by SpaceControl" >> $log
 #        fi
