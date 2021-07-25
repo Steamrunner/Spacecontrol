@@ -8,3 +8,5 @@ Restart=on-failure
 
 [Install]
 WantedBy=multi-user.target 
+
+#TODO set log path

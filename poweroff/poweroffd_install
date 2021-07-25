@@ -25,6 +25,7 @@ systemctl start poweroffd.service
 systemctl enable poweroffd.service
 
 # enable log rotate
+#TODO set log path
 
 # show info
 echo "Please create /etc/poweroffd/poweroffd.conf, and example can be found in /etc/poweroffd/poweroffd.conf.example"
