@@ -1,15 +1,31 @@
 #!/usr/bin/env bash
 
-#todo settings for host port username password
-# [-h host] [-p port] [-u username] [-P password]
+# get command line options
+config=poweroff.conf
+log=poweroff.log
+
+while getopts c:l:h flag
+do
+    case "${flag}" in
+        c) config=${OPTARG};;
+        l) log=${OPTARG};;
+        h) 
+        	echo "help"
+        	exit 0
+        	;;
+    esac
+done
+
+# load configuration file
+source $config
 
 hostname=$(cat /etc/hostname)
 topic=$(echo "/computers/$hostname")
 
-msg=$(mosquitto_sub -C 1 -t "$topic")
+msg=$(mosquitto_sub -h $host -p $port -u $username -P $password -C 1 -t "$topic")
 while [ "$msg" != "poweroff" ]
 do
-	msg=$(mosquitto_sub -C 1 -t "$topic")
+	msg=$(mosquitto_sub -h $host -p $port -u $username -P $password -C 1 -t "$topic")
 done
 
 $(dirname "$0")/SC_poweroff.sh
