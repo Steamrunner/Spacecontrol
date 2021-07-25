@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+# install dependencies
+# apt install 
+
+# install poweroffd
+cp poweroffd /usr/bin/
+
+# install script1
+mkdir -p /usr/lib/poweroffd
+cp SC_poweroff.sh /usr/lib/poweroffd/
+cp SC_poweroff_popup.sh /usr/lib/poweroffd/
+
+#install configuration
+mkdir -p /etc/poweroffd
+cp poweroffd.conf.example /etc/poweroffd/
+
+# install service
+cp poweroffd.service /etc/systemd/system/
+
+# start service 
+systemctl start poweroffd.service 
+
+# enable service
+systemctl enable poweroffd.service
+
+# enable log rotate
+
+# show info
+echo "Please create /etc/poweroffd/poweroffd.conf, and example can be found in /etc/poweroffd/poweroffd.conf.example"
+

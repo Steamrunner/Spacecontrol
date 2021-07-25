@@ -3,8 +3,8 @@
 # set defaults
 host=localhost
 port=1883
-config=poweroff.conf
-log=poweroff.log
+config=poweroffd.conf
+log=poweroffd.log
 
 # get command line options
 while getopts c:l:h flag
@@ -32,17 +32,28 @@ fi
 
 # get local variables
 hostname=$(cat /etc/hostname)
-topic=$(echo "$topic_prefix/computers/$hostname")
-echo $topic
+if [ "$topic_prefix" != "" ]
+then
+	topic=$(echo "$topic_prefix/computers/$hostname")
+else
+	topic=$(echo "computers/$hostname")
+fi
+
+if test -f "$PWD/SC_poweroff.sh"
+then
+	script=$PWD/SC_poweroff.sh
+else
+	script=$(dirname "$0")/SC_poweroff.sh
+fi
+echo "`date`      Using $script."  >> $log
 
 # wait for incomming messages
 while :
 do
 	msg=$(mosquitto_sub -h $host -p $port -u $username -P $password -C 1 -t "$topic")
-	echo $msg
 	if [ "$msg" == "poweroff" ]
 	then
 		echo "`date`      Starting poweroff script" >> $log
-		$(dirname "$0")/SC_poweroff.sh
+		eval $script
 	fi
 done

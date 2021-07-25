@@ -11,7 +11,7 @@ xhost local:$1
 (
 for i in `seq 100 -1 1`;
 do
-        abort=`wget -qO- "http://unipi:8080/rest/items/abortShutdown/state"`
+        #abort=`wget -qO- "http://unipi:8080/rest/items/abortShutdown/state"`
 
         if [ "$abort" = "ON" ] ; then
 		exit 1
