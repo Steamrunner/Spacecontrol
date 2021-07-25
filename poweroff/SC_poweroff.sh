@@ -13,6 +13,9 @@ IFS='\n' readarray whoArray <<< "$whoResults"
 # if no one is logged in this code returns an array containing empty element 
 if [ ${#whoArray[@]} == 1 ] ; then
 	if [ "$(echo -ne ${whoArray} | wc -m)" -eq 0 ]; then
+		# check for tty1
+		
+		# still nothing:
 	        echo "`date`      No logged in user found" >> SC_poweroff.log
 		exit 0
 	fi
@@ -39,7 +42,7 @@ done
 if [ $exitcode = 1 ] ; then
 	# shutdown was aborted by a user on this machine
 	# set abortShutdown in spacecontrol to ON
-        echo "`date`      Poweroff canceled by local user" >> SC_poweroff.log
+        echo "`date`      Poweroff cancelled by local user" >> SC_poweroff.log
         /usr/bin/wget -qO- "http://unipi:8080/CMD?abortShutdown=ON" >> /dev/null
         exit 1
 else
@@ -54,7 +57,7 @@ else
 			systemctl poweroff -i
 		fi
         else
-                echo "`date`      Poweroff canceled by SpaceControl" >> SC_poweroff.log
+                echo "`date`      Poweroff cancelled by SpaceControl" >> SC_poweroff.log
         fi
         exit 0
 fi
