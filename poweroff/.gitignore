@@ -1,1 +1,4 @@
 SC_poweroff.log
+targethosts.list
+wakeup.conf
+poweroff.conf
