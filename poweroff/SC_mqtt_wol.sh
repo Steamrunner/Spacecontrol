@@ -24,7 +24,7 @@ source $targethostsfile
 
 while :
 do
-	recieved=$(mosquitto_sub -h $host -p $port -u $username -P $password -v -C 1 -t "/computers/#")
+	recieved=$(mosquitto_sub -h $host -p $port -u $username -P $password -v -C 1 -t "computers/#")
 
 	msg="${recieved/* /}"
 		
