@@ -21,7 +21,7 @@ if [ ${#whoArray[@]} == 1 ] ; then
 	if [ "$(echo -ne ${whoArray} | wc -m)" -eq 0 ]; then
 		# check for tty1
 		whoResults=$(who | grep 'tty1')
-		whoResults=$whoResults + " (:0)"
+		whoResults="$whoResults (:0)"
 		echo $whoArray >> $log
 		if [ "$(echo -ne ${whoArray} | wc -m)" -eq 0 ]; then
 			# still nothing:
