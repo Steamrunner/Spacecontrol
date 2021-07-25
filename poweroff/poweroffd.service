@@ -3,7 +3,7 @@ Description=poweroffd - poweroff systems by mqtt
 
 [Service]
 WorkingDirectory=/usr/lib/poweroffd 
-ExecStart=/usr/bin/poweroffd -c /etc/poweroffd/poweroffd.conf
+ExecStart=/usr/bin/poweroffd -c /etc/poweroffd/poweroffd.conf -l /var/log/poweroffd/poweroffd.log
 Restart=on-failure
 
 [Install]

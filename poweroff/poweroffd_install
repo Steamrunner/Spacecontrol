@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # install dependencies
-# apt install 
+# apt install mosquitto-client
 
 # install poweroffd
 cp poweroffd /usr/bin/
@@ -24,8 +24,8 @@ systemctl start poweroffd.service
 # enable service
 systemctl enable poweroffd.service
 
-# enable log rotate
-#TODO set log path
+#TODO enable log rotate
+mkdir -p /var/log/poweroffd
 
 # show info
 echo "Please create /etc/poweroffd/poweroffd.conf, and example can be found in /etc/poweroffd/poweroffd.conf.example"
