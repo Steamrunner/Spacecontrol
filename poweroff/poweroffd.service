@@ -7,6 +7,4 @@ ExecStart=/usr/bin/poweroffd -c /etc/poweroffd/poweroffd.conf -l /var/log/powero
 Restart=on-failure
 
 [Install]
-WantedBy=multi-user.target 
-
-#TODO set log path
+WantedBy=multi-user.target

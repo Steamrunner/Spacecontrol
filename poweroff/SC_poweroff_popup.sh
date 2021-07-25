@@ -8,6 +8,9 @@ export XAUTHORITY=/home/$1/.Xauthority
 export DISPLAY=$2
 xhost local:$1
 
+# activate screen
+xset -display :0 dpms force on
+
 (
 for i in `seq 100 -1 1`;
 do

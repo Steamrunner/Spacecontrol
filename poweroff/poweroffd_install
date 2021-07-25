@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # install dependencies
-# apt install mosquitto-client
+# apt install mosquitto-client zenity
 
 # install poweroffd
 cp poweroffd /usr/bin/
